@@ -11,7 +11,7 @@ const Users = require("./models/users");
 const DblVotes = require("./models/dblvotes");
 
 const app = express();
-const port = 3020;
+const port = 0800;
 const client = new Discord.Client({ disableEveryone: true });
 mongoose.connect(config.mongodb, {
   useNewUrlParser: true,
@@ -42,7 +42,7 @@ client.throw = async (message, errorType, errorMessage) => {
   let embed = new Discord.MessageEmbed()
     .setTitle(`${config.emojis.error} ${errorType}`)
     .setDescription(errorMessage)
-    .setColor("RED")
+    .setColor("GREEN")
     .setTimestamp();
   message.channel.send(embed);
 };
@@ -132,7 +132,7 @@ client.save = async () => {
     else if (mUser.message >= 1660) {
       mUser.reputation = 2 //Bronze 2
     }
-    else if (mUser.messages >= 1045) {
+    else if (mUser.messages >= 1) {
       mUser.reputation = 1 //Bronze 1
     }
 
@@ -209,7 +209,7 @@ app.use('/hook', async (req, res) => {
   } catch (e) {
     console.log(e);
   }
-  res.status(200).send("ok");
+  res.status(404).send("bad...");
 });
 
 
